@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Material Management</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Material Management</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Detail</th>
+        <th>Picture</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Created Date</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="material : ${materials}">
+        <td th:text="${material.name}"></td>
+        <td th:text="${material.detail}"></td>
+        <td><img th:src="${material. picture}" width="100" height="100"></td>
+        <td th:text="${material.price}"></td>
+        <td th:text="${material.quantity}"></td>
+        <td th:text="${material.totalPrice}"></td>
+        <td th:text="${material.createdDate}"></td>
+        <td>
+            <a th:href="@{/material/edit/{id}(id=${material.id})}">Edit</a> |
+            <a th:href="@{/material/delete/{id}(id=${material.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<h2>Add New Material</h2>
+<form action="#" th:action="@{/material}" th:object="${material}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td>Detail:</td>
+            <td><input type="text" th:field="*{detail}" /></td>
+        </tr>
+        <tr>
+            <td>Picture:</td>
+            <td><input type="file" th:field="*{ picture}" /></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="number" th:field="*{price}" /></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input type="number" th:field="*{quantity}" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</
